@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import {Routes, Route, Link} from "react-router-dom";
+import Layout from "./components/Layout";
+import UserListPage from "./pages/UserListPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+    return (
+        <div>
+            <Routes>
+                <Route path="/users" element={<Layout />}>
+                    <Route index element={<UserListPage />} />
+                    <Route path="/users/:id" element={<UserProfilePage />} />
+                </Route>
+                <Route path="*" element={<div>
+                    <h1>404</h1>
+                    <h2>you may need to navigate to {<Link to="/users">/users</Link>} by yourself</h2>
+                </div>} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
